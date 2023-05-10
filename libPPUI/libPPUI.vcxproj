@@ -271,12 +271,12 @@
     <ClCompile Include="TypeFind.cpp" />
     <ClCompile Include="win32_op.cpp" />
     <ClCompile Include="win32_utility.cpp" />
+    <ClCompile Include="wtl-pp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="libPPUI-license.txt" />
     <Text Include="libPPUI-readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

@@ -312,7 +312,6 @@
     <ClInclude Include="fb2k_threads.h" />
     <ClInclude Include="fb2k_wfx.h" />
     <ClInclude Include="fileReadAhead.h" />
-    <ClInclude Include="file_readonly.h" />
     <ClInclude Include="foobar2000+atl.h" />
     <ClInclude Include="foobar2000-lite+atl.h" />
     <ClInclude Include="fullFileBuffer.h" />
@@ -356,6 +355,7 @@
     <ClInclude Include="ProcessUtils.h" />
     <ClInclude Include="ProfileCache.h" />
     <ClInclude Include="readers.h" />
+    <ClInclude Include="readers_lite.h" />
     <ClInclude Include="reader_pretend_nonseekable.h" />
     <ClInclude Include="readWriteLock.h" />
     <ClInclude Include="rethrow.h" />

@@ -2,7 +2,7 @@
 // foobar2000-versions.h
 // foobar2000 SDK version and target API levels are declared in this header
 
-#define FOOBAR2000_TARGET_VERSION 81 // 2.0
+#define FOOBAR2000_TARGET_VERSION 81
 
 #ifdef _M_IX86
 #define FOOBAR2000_TARGET_VERSION_COMPATIBLE 72
@@ -17,7 +17,7 @@
 
 
 // Use this to determine what foobar2000 SDK version is in use, undefined for releases older than 2018
-#define FOOBAR2000_SDK_VERSION 20230418
+#define FOOBAR2000_SDK_VERSION 20230510
 
 // cfg_var downgrade support, experimental, intended for specific components only.
 // Allows new style configStore data to be imported back to old foobar2000 friendly cfg_vars.
