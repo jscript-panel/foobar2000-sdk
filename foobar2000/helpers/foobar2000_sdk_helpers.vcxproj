@@ -330,6 +330,7 @@
     <ClInclude Include="file_info_const_impl.h" />
     <ClInclude Include="file_list_helper.h" />
     <ClInclude Include="file_move_helper.h" />
+    <ClInclude Include="file_streamstub.h" />
     <ClInclude Include="file_win32_wrapper.h" />
     <ClInclude Include="filetimetools.h" />
     <ClInclude Include="helpers.h" />
