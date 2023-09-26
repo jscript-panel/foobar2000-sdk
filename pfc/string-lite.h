@@ -11,8 +11,10 @@ namespace pfc {
 
 	class stringLite : public string_base {
 	public:
-		class tagNoShrink {};
+		struct tagNoShrink {};
+		struct tagPrealloc { size_t amount; };
 		stringLite(tagNoShrink) { this->setNoShrink(); }
+		stringLite(tagPrealloc const& tag) { this->prealloc(tag.amount); }
 		stringLite() {}
 		stringLite( std::string_view p ) { set_string( p.data(), p.length() ); }
 		stringLite( const std::string & p ) { set_string( p.c_str(), p.length() ); }
