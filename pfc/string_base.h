@@ -16,7 +16,6 @@ namespace pfc {
 	bool is_lower_ascii(const char * param);
 	bool is_multiline(const char * p_string,t_size p_len = SIZE_MAX);
 	bool has_path_bad_chars(const char * param);
-	void recover_invalid_utf8(const char * src,char * out,unsigned replace);//out must be enough to hold strlen(char) + 1, or appropiately bigger if replace needs multiple chars
 	void convert_to_lower_ascii(const char * src,t_size max,char * out,char replace = '?');//out should be at least strlen(src)+1 long
 
 	template<typename char_t> inline char_t ascii_tolower(char_t c) {if (c >= 'A' && c <= 'Z') c += 'a' - 'A'; return c;}
@@ -264,7 +263,6 @@ namespace pfc {
 	string8 format_mask(bit_array const& mask, size_t n);
 }
 
-inline pfc::string_base & operator<<(pfc::string_base & p_fmt,const std::string & p_source) {p_fmt.add_string_(p_source.c_str()); return p_fmt;}
 inline pfc::string_base & operator<<(pfc::string_base & p_fmt,const char * p_source) {p_fmt.add_string_(p_source); return p_fmt;}
 	   pfc::string_base & operator<<(pfc::string_base & p_fmt,const wchar_t* p_source); // string_conv.cpp
 inline pfc::string_base & operator<<(pfc::string_base & p_fmt,pfc::string_part_ref source) {p_fmt.add_string(source.m_ptr, source.m_len); return p_fmt;}
@@ -414,4 +412,7 @@ namespace pfc {
 	}
 
 	pfc::string8 prefixLines(const char* str, const char* prefix, const char * setEOL = "\n");
+
+
+	pfc::string8 recover_invalid_utf8(const char* in, const char* subst = "_");
 }

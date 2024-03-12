@@ -6,7 +6,7 @@ namespace pfc {
     const fileHandle_t fileHandleInvalid = INVALID_HANDLE_VALUE;
 #else
     typedef int fileHandle_t;
-    const fileHandle_t fileHandleInvalid = -1;
+    constexpr fileHandle_t fileHandleInvalid = -1;
 #endif
     
     void fileHandleClose( fileHandle_t h );

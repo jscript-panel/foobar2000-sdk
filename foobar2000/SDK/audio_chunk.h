@@ -221,7 +221,7 @@ public:
 	void pad_with_silence_ex(t_size samples,unsigned hint_nch,unsigned hint_srate);
 	//! Appends silent samples at the end of the chunk. \n
 	//! The chunk must have valid sample rate & channel count prior to this call.
-	//! @param samples Number of silent samples to append.s
+	//! @param samples Number of silent samples to append.
 	void pad_with_silence(t_size samples);
 	//! Inserts silence at the beginning of the audio chunk.
 	//! @param samples Number of silent samples to insert.

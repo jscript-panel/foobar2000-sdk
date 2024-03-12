@@ -549,7 +549,7 @@ private:
 		pfc::lores_timer timer; timer.start();	\
 		for(;;) {	\
 			try { {OP;} break;	}	\
-			catch(EXCEPTION) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION &) { if (timer.query() > TIMEOUT) throw;}	\
 			ABORT.sleep(0.05);	\
 		}	\
 	}
@@ -559,8 +559,8 @@ private:
 		pfc::lores_timer timer; timer.start();	\
 		for(;;) {	\
 			try { {OP;} break;	}	\
-			catch(EXCEPTION1) { if (timer.query() > TIMEOUT) throw;}	\
-			catch(EXCEPTION2) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION1 &) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION2 &) { if (timer.query() > TIMEOUT) throw;}	\
 			ABORT.sleep(0.05);	\
 		}	\
 	}
@@ -570,9 +570,9 @@ private:
 		pfc::lores_timer timer; timer.start();	\
 		for(;;) {	\
 			try { {OP;} break;	}	\
-			catch(EXCEPTION1) { if (timer.query() > TIMEOUT) throw;}	\
-			catch(EXCEPTION2) { if (timer.query() > TIMEOUT) throw;}	\
-			catch(EXCEPTION3) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION1 &) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION2 &) { if (timer.query() > TIMEOUT) throw;}	\
+			catch(const EXCEPTION3 &) { if (timer.query() > TIMEOUT) throw;}	\
 			ABORT.sleep(0.05);	\
 		}	\
 	}

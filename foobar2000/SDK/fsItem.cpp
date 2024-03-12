@@ -166,7 +166,7 @@ namespace {
 				try {
 					if (createMode == createMode::allowExisting) m_fs->move_overwrite(m_path->c_str(), dst, aborter);
 					else m_fs->move(m_path->c_str(), dst, aborter);
-				} catch (exception_io_already_exists) {
+				} catch (exception_io_already_exists const &) {
 					bDidExist = true;
 				}
 
@@ -277,7 +277,7 @@ namespace {
 				try {
 					stats = m_fs->get_stats2_( sub->c_str(), stats2_all, aborter );
 					bDidExist = stats.is_file();
-				} catch(exception_io_not_found) {}
+				} catch(exception_io_not_found const &) {}
 				switch (createMode) {
 				case createMode::allowExisting:
 					break; // OK
@@ -310,7 +310,7 @@ namespace {
 				bool bDidExist = false;
 				try {
 					m_fs->create_directory(sub->c_str(), aborter);
-				} catch (exception_io_already_exists) {
+				} catch (exception_io_already_exists const &) {
 					bDidExist = true;
 				}
 				switch (createMode) {
@@ -342,7 +342,7 @@ namespace {
 				try {
 					if (createMode == createMode::allowExisting) m_fs->move_overwrite(m_path->c_str(), dst, aborter);
 					else m_fs->move(m_path->c_str(), dst, aborter);
-				} catch (exception_io_already_exists) {
+				} catch (exception_io_already_exists const &) {
 					bDidExist = true;
 				}
 

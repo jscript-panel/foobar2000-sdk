@@ -4,6 +4,9 @@
 
 #ifdef FOOBAR2000_HAVE_DSP
 
+#include <memory>
+#include <vector>
+
 class dsp_preset; // forward declaration
 
 //! Interface to a DSP chunk list. A DSP chunk list object is passed to the DSP chain each time, since DSPs are allowed to remove processed chunks or insert new ones.
@@ -31,13 +34,19 @@ protected:
 
 class dsp_chunk_list_impl : public dsp_chunk_list//implementation
 {
-	pfc::list_t<pfc::rcptr_t<audio_chunk> > m_data, m_recycled;
+	typedef std::unique_ptr<audio_chunk_impl> chunk_ptr_t;
+	std::vector<chunk_ptr_t> m_data, m_recycled;
 public:
+	dsp_chunk_list_impl() {}
+	dsp_chunk_list_impl(const dsp_chunk_list_impl&) = delete;
+	void operator=(const dsp_chunk_list_impl&) = delete;
 	t_size get_count() const;
 	audio_chunk * get_item(t_size n) const;
 	void remove_by_idx(t_size idx);
 	void remove_mask(const bit_array & mask);
 	audio_chunk * insert_item(t_size idx,t_size hint_size=0);
+
+	audio_chunk_impl* get_item_(size_t n) const { return m_data[n].get(); }
 };
 
 //! Instance of a DSP.\n
@@ -126,7 +135,7 @@ protected:
 	
 	//! Inserts a new chunk of audio data. \n
 	//! You can call this only from on_chunk(), on_endofplayback() and on_endoftrack(). You're NOT allowed to call this from flush() which should just drop any queued data.
-	//! @param hint_size Optional, amount of buffer space that you require (in audio_samples). This is just a hint for memory allocation logic and will not cause the framework to allocate the chunk for you.
+	//! @param p_hint_size Optional, amount of buffer space that you require (in audio_samples). This is just a hint for memory allocation logic and will not cause the framework to allocate the chunk for you.
 	//! @returns A pointer to the newly allocated chunk. Pass the audio data you want to insert to this chunk object. The chunk is owned by the framework, you can't delete it etc.
 	audio_chunk * insert_chunk(t_size p_hint_size = 0) {
 		PFC_ASSERT(m_list != NULL);

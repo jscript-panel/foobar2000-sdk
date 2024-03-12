@@ -1354,4 +1354,18 @@ void string_base::fix_dir_separator(char c) {
 		return ret;
 	}
 
+	pfc::string8 recover_invalid_utf8(const char* in, const char* subst) {
+		pfc::string8 ret; ret.prealloc(strlen(in));
+		for (;;) {
+			char c = *in;
+			if (c == 0) break;
+			if (c < ' ') {
+				ret += subst;
+			} else {
+				ret.add_byte(c);
+			}
+			++in;
+		}
+		return ret;
+	}
 } //namespace pfc

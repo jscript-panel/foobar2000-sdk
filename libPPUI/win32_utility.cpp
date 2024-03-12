@@ -173,6 +173,17 @@ void InjectParentEraseHandler(HWND wnd) {
 void InjectParentCtlColorHandler(HWND wnd) {
 	WIN32_OP_D(SetWindowSubclass(wnd, CtlColorProc, 0, 0));
 }
+static LRESULT CALLBACK BounceNextDlgCtlProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData) {
+	if (uMsg == WM_NEXTDLGCTL) {
+		return ::SendMessage((HWND)dwRefData, uMsg, wParam, lParam);
+	}
+	return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+}
+
+void BounceNextDlgCtl(HWND wnd, HWND wndTo) {
+	::SetWindowSubclass(wnd, BounceNextDlgCtlProc, 0, (DWORD_PTR)wndTo);
+}
+
 
 pfc::string8 EscapeTooltipText(const char * src)
 {

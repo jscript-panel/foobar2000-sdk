@@ -457,6 +457,7 @@ namespace pfc {
 			_unlink_recur(m_root);
 			m_root.release();
 		}
+		void clear() throw() { remove_all(); }
 
 		bool remove(const_iterator const& iter) {
 			PFC_ASSERT(iter.is_valid());
@@ -471,9 +472,8 @@ namespace pfc {
 			return ret;
 		}
 
-		t_size get_count() const throw() {
-			return calc_count(m_root.get_ptr());
-		}
+		t_size get_count() const throw() { return calc_count(m_root.get_ptr()); }
+		size_t size() const throw() { return get_count(); }
 
 		template<typename t_callback>
 		void enumerate(t_callback && p_callback) const {

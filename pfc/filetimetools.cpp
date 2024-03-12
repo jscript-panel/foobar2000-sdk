@@ -182,7 +182,7 @@ static t_filetimestamp filetimestamp_from_string_internal(const char* date, bool
         } else {
             return ExportSystemTime(st);
         }
-    } catch (exception_time_error) {
+    } catch (exception_time_error const &) {
         return filetimestamp_invalid;
     }
 }

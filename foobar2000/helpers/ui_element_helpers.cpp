@@ -44,7 +44,7 @@ namespace ui_element_helpers {
 		if (!find(ptr,cfg->get_guid())) return NULL;
 		try {
 			return ptr->enumerate_children(cfg);
-		} catch(exception_io_data) {
+		} catch(exception_io_data const &) {
 			return NULL;
 		}
 	}
@@ -304,7 +304,7 @@ bool ui_element_helpers::recurse_for_elem_config(ui_element_config::ptr root, ui
 	ui_element_children_enumerator::ptr children;
 	try {
 		children = elem->enumerate_children(root);
-	} catch(exception_io_data) {return false;}
+	} catch(exception_io_data const &) {return false;}
 	if (children.is_empty()) return false;
 	const t_size childrenTotal = children->get_count();
 	for(t_size walk = 0; walk < childrenTotal; ++walk) {

@@ -62,9 +62,18 @@ namespace {
 			MESSAGE_HANDLER_EX(LVM_ENABLEGROUPVIEW, OnEnableGroupView)
 			MESSAGE_HANDLER_EX(LVM_SCROLL, OnScroll)
 			MESSAGE_HANDLER_EX(LVM_REDRAWITEMS, OnRedrawItems)
+			MSG_WM_KEYDOWN(OnKeyDown)
+			MSG_WM_SYSKEYDOWN(OnKeyDown)
 			CHAIN_MSG_MAP(CListControlComplete)
 		END_MSG_MAP()
 
+		void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
+			NMLVKEYDOWN arg = {};
+			arg.hdr = this->setupHdr(LVN_KEYDOWN);
+			arg.wVKey = nChar;
+			sendNotify(&arg);
+			SetMsgHandled(FALSE);
+		}
 		LRESULT OnCreate(LPCREATESTRUCT) {
 			SetMsgHandled(FALSE);
 			// Adopt style flags of the original control to keep various ATL checks happy

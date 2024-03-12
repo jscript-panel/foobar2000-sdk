@@ -131,7 +131,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -157,7 +156,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -182,7 +180,6 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -207,7 +204,6 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -229,7 +225,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/d2notypeopt %(AdditionalOptions)</AdditionalOptions>
       <TreatSpecificWarningsAsErrors>4715</TreatSpecificWarningsAsErrors>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
@@ -237,6 +233,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -258,7 +255,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/d2notypeopt %(AdditionalOptions)</AdditionalOptions>
       <TreatSpecificWarningsAsErrors>4715</TreatSpecificWarningsAsErrors>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
@@ -287,7 +284,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/d2notypeopt %(AdditionalOptions)</AdditionalOptions>
       <TreatSpecificWarningsAsErrors>4715</TreatSpecificWarningsAsErrors>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
@@ -317,7 +314,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/d2notypeopt /Zc:char8_t- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/d2notypeopt %(AdditionalOptions)</AdditionalOptions>
       <TreatSpecificWarningsAsErrors>4715</TreatSpecificWarningsAsErrors>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
@@ -355,6 +352,7 @@
     <ClInclude Include="cpuid.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="event.h" />
+    <ClInclude Include="event_std.h" />
     <ClInclude Include="filehandle.h" />
     <ClInclude Include="filetimetools.h" />
     <ClInclude Include="fixed_map.h" />
@@ -393,6 +391,7 @@
     <ClInclude Include="SmartStrStr.h" />
     <ClInclude Include="sort.h" />
     <ClInclude Include="sort2.h" />
+    <ClInclude Include="sortstring.h" />
     <ClInclude Include="splitString.h" />
     <ClInclude Include="splitString2.h" />
     <ClInclude Include="stdsort.h" />

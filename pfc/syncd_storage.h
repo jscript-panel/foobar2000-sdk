@@ -12,9 +12,9 @@ public:
 	template<typename t_source>
 	syncd_storage(const t_source & p_source) : m_object(p_source) {}
 	template<typename t_source>
-	void set(t_source const & p_in) {
+	void set(t_source && p_in) {
 		inWriteSync(m_sync);
-		m_object = p_in;
+		m_object = std::forward<t_source>( p_in );
 	}
 	template<typename t_destination>
 	void get(t_destination & p_out) const {
@@ -26,7 +26,7 @@ public:
 		return m_object;
 	}
 	template<typename t_source>
-	const t_self & operator=(t_source const & p_source) {set(p_source); return *this;}
+	const t_self & operator=(t_source && p_source) {set(std::forward<t_source>(p_source)); return *this;}
 private:
 	mutable ::pfc::readWriteLock m_sync;
 	t_object m_object;
@@ -47,9 +47,9 @@ public:
 		m_changed_flag = p_flag;
 	}
 	template<typename t_source>
-	void set(t_source const & p_in) {
+	void set(t_source && p_in) {
 		inWriteSync(m_sync);
-		m_object = p_in;
+		m_object = std::forward<t_source>(p_in);
 		m_changed_flag = true;
 	}
 	bool has_changed() const {
@@ -86,7 +86,19 @@ public:
 		m_changed_flag = false;
 	}
 	template<typename t_source>
-	const t_self & operator=(t_source const & p_source) {set(p_source); return *this;}
+	const t_self & operator=(t_source && p_source) {set(std::forward<t_source>(p_source)); return *this;}
+
+	template<typename arg_t>
+	bool compare_and_set(arg_t&& arg) {
+		inWriteSync(m_sync);
+		bool ret = false;
+		if (arg != m_object) {
+			m_object = std::forward<arg_t>(arg);
+			m_changed_flag = true;
+			ret = true;
+		}
+		return ret;
+	}
 private:
 	mutable volatile bool m_changed_flag;
 	mutable ::pfc::readWriteLock m_sync;

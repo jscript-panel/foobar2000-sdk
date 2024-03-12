@@ -84,6 +84,7 @@ public:
 	static bool is_spacing(char c) { return c == ' ' || c == 10 || c == 13 || c == '\t'; }
 
 	void init(const char* ptr, size_t len);
+	void init( const char * ptr ) { init(ptr, strlen(ptr)); }
 	bool test(const char* src) const;
 	bool testWords(const char* src) const;
 	bool test_disregardCounts(const char* src) const;
@@ -91,6 +92,8 @@ public:
 	const t_stringlist& items() const { return m_items; }
 	operator bool() const { return !m_items.empty(); }
 	bool empty() const { return m_items.empty(); }
+
+	SmartStrStr & _SmartStrStr() const { return *dc; }
 private:
 	t_stringlist m_items;
 	SmartStrStr * dc = &SmartStrStr::global();

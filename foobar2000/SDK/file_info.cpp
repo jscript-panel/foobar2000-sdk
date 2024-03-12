@@ -412,6 +412,14 @@ bool replaygain_info::g_equal(const replaygain_info & item1,const replaygain_inf
 			item1.m_track_peak == item2.m_track_peak;
 }
 
+void replaygain_info::adjust(double deltaDB) {
+	if (this->is_album_gain_present()) this->m_album_gain -= (float)deltaDB;
+	if (this->is_track_gain_present()) this->m_track_gain -= (float)deltaDB;
+	const auto scale = audio_math::gain_to_scale(deltaDB);
+	if (this->is_album_peak_present()) this->m_album_peak *= (float)scale;
+	if (this->is_track_peak_present()) this->m_track_peak *= (float)scale;
+}
+
 bool file_info::are_meta_fields_identical(t_size p_index1,t_size p_index2) const
 {
 	const t_size count = meta_enum_value_count(p_index1);
@@ -497,6 +505,11 @@ bool file_info::is_encoding_lossy() const {
 		//if (info_get("bitspersample") == NULL) return true;
 	}
 	return false;
+}
+
+bool file_info::is_encoding_lossless() const {
+	const char* encoding = info_get("encoding");
+	return encoding != nullptr && pfc::stringEqualsI_ascii(encoding, "lossless");
 }
 
 bool file_info::g_is_meta_equal(const file_info & p_item1,const file_info & p_item2) {
@@ -930,6 +943,22 @@ void file_info::meta_enumerate(meta_enumerate_t cb) const {
 			cb(name, value);
 		}
 	}
+}
+
+bool file_info::meta_value_exists( const char * name, const char * findValue, bool insensitive ) const {
+	const auto idx = this->meta_find(name);
+	if ( idx != SIZE_MAX ) {
+		const auto count = this->meta_enum_value_count(idx);
+		for( size_t walk = 0; walk < count; ++ walk) {
+			auto value = this->meta_enum_value(idx, walk);
+			if ( insensitive ) {
+				if (pfc::stringEqualsI_utf8(value, findValue)) return true;
+			} else {
+				if ( strcmp(value, findValue)) return true;
+			}
+		}
+	}
+	return false;
 }
 
 #ifdef FOOBAR2000_MOBILE
